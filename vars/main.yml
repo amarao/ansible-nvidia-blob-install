@@ -1,0 +1,5 @@
+---
+# vars file for nvidia-blob-install
+nvidia_file_name: NVIDIA-Linux-x86_64-{{nvidia_driver_version}}.run
+nvidia_driver_url: http://us.download.nvidia.com/XFree86/Linux-x86_64/{{nvidia_driver_version}}/{{nvidia_file_name}}
+exe: /var/cache/{{nvidia_file_name}}

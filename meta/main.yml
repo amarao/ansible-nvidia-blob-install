@@ -1,0 +1,37 @@
+galaxy_info:
+  author: George Shuklin
+  description: installing nvidia from blob
+
+  issue_tracker_url: http://github.com/amarao/ansible-nvidia-blob-install
+
+  # Some suggested licenses:
+  # - BSD (default)
+  # - MIT
+  # - GPLv2
+  # - GPLv3
+  # - Apache
+  # - CC-BY
+  license: license (GPLv2, CC-BY, etc)
+
+  min_ansible_version: 1.7
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - utopic
+    - vivid
+    - wily
+    - xenial
+    - yakkety
+  - name: Debian
+    versions:
+    - sid
+    - stretch
+    - wheezy
+
+  galaxy_tags:
+    - nvidia
+    - blob
+
+dependencies: []

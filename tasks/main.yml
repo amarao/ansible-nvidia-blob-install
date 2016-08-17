@@ -1,0 +1,37 @@
+---
+# tasks file for nvidia-blob-install
+- name: Download driver blob
+  get_url:
+    dest: /var/cache/{{nvidia_file_name}}
+    mode: 0755
+    owner: root
+    group: root
+    url: "{{nvidia_driver_url}}"
+
+- name: Install build dependencies
+  apt: name={{item}} update_cache=yes
+  with_items:
+    - build-essential
+    - dkms
+    - linux-generic
+
+- name: remove nouveau driver
+  shell: rmmod nouveau
+  register: nouveau_remove
+  changed_when: '{{nouveau_remove.rc != 0}}'
+  failed_when: '{{"in use" in nouveau_remove.stderr}}'
+
+- name: blacklist nouveau driver
+  copy: dest=/etc/modprobe.d/blacklist-nouveau.conf content='blacklist nouveau' force=yes
+  register: blacklist_changed
+
+- name: update initramfs
+  shell: update-initramfs -u
+  when: blacklist_changed|changed
+
+- name: Running NVIDIA installer
+  shell: "{{exe}} -a -z --no-x-check --dkms -c -s"
+  register: nvidia_log
+
+- name: modprobe modules
+  shell: modprobe nvidia nvidia_uvm
