@@ -23,7 +23,6 @@ galaxy_info:
     - vivid
     - wily
     - xenial
-    - yakkety
   - name: Debian
     versions:
     - sid
